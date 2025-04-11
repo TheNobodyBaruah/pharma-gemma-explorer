@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { SendHorizontal } from 'lucide-react';
+import { SendHorizontal, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ChatMessage } from '@/types';
@@ -37,33 +37,42 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
 
   return (
     <Card className="flex h-full flex-col">
-      <CardHeader>
-        <CardTitle>TxGemma AI Assistant</CardTitle>
+      <CardHeader className="px-4 py-3">
+        <CardTitle className="flex items-center gap-2 text-lg">
+          <span className="h-2 w-2 rounded-full bg-green-500"></span>
+          TxGemma AI Assistant
+        </CardTitle>
       </CardHeader>
       <CardContent className="flex-1 p-0">
         <ScrollArea className="h-[400px] px-6">
-          <div className="space-y-4">
-            {messages.map((msg) => (
-              <div
-                key={msg.id}
-                className={`flex ${
-                  msg.role === 'user' ? 'justify-end' : 'justify-start'
-                }`}
-              >
+          <div className="space-y-4 pb-4">
+            {messages.length === 0 ? (
+              <div className="flex h-[300px] items-center justify-center text-muted-foreground">
+                <p>Ask a question about therapeutic development to get started</p>
+              </div>
+            ) : (
+              messages.map((msg) => (
                 <div
-                  className={`max-w-[80%] rounded-lg px-4 py-2 ${
-                    msg.role === 'user'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-secondary text-secondary-foreground'
+                  key={msg.id}
+                  className={`flex ${
+                    msg.role === 'user' ? 'justify-end' : 'justify-start'
                   }`}
                 >
-                  <p className="text-sm">{msg.content}</p>
-                  <p className="mt-1 text-right text-xs opacity-70">
-                    {new Date(msg.timestamp).toLocaleTimeString()}
-                  </p>
+                  <div
+                    className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                      msg.role === 'user'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-secondary text-secondary-foreground'
+                    }`}
+                  >
+                    <p className="text-sm">{msg.content}</p>
+                    <p className="mt-1 text-right text-xs opacity-70">
+                      {new Date(msg.timestamp).toLocaleTimeString()}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
             {isLoading && (
               <div className="flex justify-start">
                 <div className="max-w-[80%] rounded-lg bg-secondary px-4 py-2 text-secondary-foreground">
@@ -79,16 +88,26 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
           </div>
         </ScrollArea>
       </CardContent>
-      <CardFooter className="border-t bg-card pt-4">
+      <CardFooter className="border-t bg-card p-3">
         <form onSubmit={handleSubmit} className="flex w-full space-x-2">
           <Input
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Ask a question about therapeutic development..."
             disabled={isLoading}
+            className="flex-1"
+            aria-label="Chat message"
           />
-          <Button type="submit" disabled={!message.trim() || isLoading}>
-            <SendHorizontal className="h-4 w-4" />
+          <Button 
+            type="submit" 
+            disabled={!message.trim() || isLoading}
+            aria-label="Send message"
+          >
+            {isLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <SendHorizontal className="h-4 w-4" />
+            )}
           </Button>
         </form>
       </CardFooter>
