@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import SmilesDrawer from 'smiles-drawer';
 
 interface MoleculeViewerProps {
   smiles: string | null;
@@ -19,48 +20,54 @@ const MoleculeViewer: React.FC<MoleculeViewerProps> = ({
 
   useEffect(() => {
     if (smiles && canvasRef.current) {
-      // In a real application, this would use SmilesDrawer to render the molecule
-      // For this mock-up, we'll just display a placeholder
-      const ctx = canvasRef.current.getContext('2d');
-      if (ctx) {
-        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-        ctx.font = '14px Arial';
-        ctx.fillStyle = '#666';
-        ctx.textAlign = 'center';
-        ctx.fillText('Molecule Visualization Placeholder', canvasRef.current.width / 2, 50);
-        ctx.fillText(`SMILES: ${smiles}`, canvasRef.current.width / 2, 80);
-        
-        // Draw a simple representation
-        ctx.beginPath();
-        ctx.moveTo(150, 100);
-        ctx.lineTo(250, 100);
-        ctx.lineTo(300, 180);
-        ctx.lineTo(200, 220);
-        ctx.lineTo(100, 180);
-        ctx.closePath();
-        ctx.strokeStyle = '#3B82F6';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        
-        // Draw some atoms (circles)
-        const drawAtom = (x: number, y: number, label: string) => {
-          ctx.beginPath();
-          ctx.arc(x, y, 15, 0, 2 * Math.PI);
-          ctx.fillStyle = '#DBEAFE';
-          ctx.fill();
-          ctx.strokeStyle = '#3B82F6';
-          ctx.stroke();
-          ctx.fillStyle = '#1E40AF';
+      try {
+        // Initialize SmilesDrawer
+        const drawer = new SmilesDrawer.Drawer({
+          width: 400,
+          height: 300,
+          bondThickness: 1.2,
+          shortBondLength: 0.8,
+          bondSpacing: 5.1,
+          atomVisualization: 'default',
+          isomeric: true,
+          debug: false,
+          terminalCarbons: true,
+          explicitHydrogens: true,
+          overlapSensitivity: 0.42,
+          atomColoring: true
+        });
+
+        // Parse and draw the molecule
+        SmilesDrawer.parse(smiles, (tree: any) => {
+          if (canvasRef.current) {
+            drawer.draw(tree, canvasRef.current.id, 'light');
+          }
+        }, (error: Error) => {
+          // Handle parsing error
+          console.error('Error parsing SMILES:', error);
+          const ctx = canvasRef.current?.getContext('2d');
+          if (ctx) {
+            ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+            ctx.font = '16px Arial';
+            ctx.fillStyle = '#DC2626'; // text-red-600
+            ctx.textAlign = 'center';
+            ctx.fillText('Error rendering molecule structure', canvasRef.current.width / 2, 150);
+            ctx.font = '14px Arial';
+            ctx.fillStyle = '#666';
+            ctx.fillText(`SMILES: ${smiles}`, canvasRef.current.width / 2, 180);
+          }
+        });
+      } catch (error) {
+        console.error('Error initializing SmilesDrawer:', error);
+        // Fallback to basic error display
+        const ctx = canvasRef.current?.getContext('2d');
+        if (ctx) {
+          ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+          ctx.font = '16px Arial';
+          ctx.fillStyle = '#DC2626'; // text-red-600
           ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(label, x, y);
-        };
-        
-        drawAtom(150, 100, 'C');
-        drawAtom(250, 100, 'N');
-        drawAtom(300, 180, 'O');
-        drawAtom(200, 220, 'C');
-        drawAtom(100, 180, 'C');
+          ctx.fillText('Failed to initialize molecular renderer', canvasRef.current.width / 2, 150);
+        }
       }
     }
   }, [smiles]);
@@ -79,6 +86,7 @@ const MoleculeViewer: React.FC<MoleculeViewerProps> = ({
         <div className="rounded-lg border bg-white p-4">
           <canvas 
             ref={canvasRef} 
+            id="molecule-structure-canvas"
             width={400} 
             height={300} 
             className="mx-auto"
