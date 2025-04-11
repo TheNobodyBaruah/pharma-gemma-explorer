@@ -4,6 +4,7 @@ import { Target } from '@/types';
 import { RadioGroup } from '@/components/ui/radio-group';
 import { Loader } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 interface TargetListProps {
   targets: Target[] | null;
@@ -81,11 +82,15 @@ const TargetList: React.FC<TargetListProps> = ({
                     <div className="h-2 w-2 translate-x-1/2 translate-y-1/2 rounded-full bg-pharma-500"></div>
                   )}
                 </div>
-                <div>
-                  <h3 className="font-medium">{target.name}</h3>
-                  {target.type && (
-                    <p className="text-sm text-muted-foreground">{target.type}</p>
-                  )}
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-medium">{target.name}</h3>
+                    {target.type && (
+                      <Badge variant="outline" className="bg-pharma-50 text-pharma-700">
+                        {target.type}
+                      </Badge>
+                    )}
+                  </div>
                   {target.description && (
                     <p className="mt-1 text-sm">{target.description}</p>
                   )}
