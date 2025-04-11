@@ -2,7 +2,7 @@
 import React from 'react';
 import { Target } from '@/types';
 import { RadioGroup } from '@/components/ui/radio-group';
-import { Spinner } from 'lucide-react';
+import { Loader } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 interface TargetListProps {
@@ -25,7 +25,7 @@ const TargetList: React.FC<TargetListProps> = ({
       <Card className="w-full animate-pulse">
         <CardHeader>
           <CardTitle className="flex items-center">
-            <Spinner className="mr-2 h-4 w-4 animate-spin" />
+            <Loader className="mr-2 h-4 w-4 animate-spin" />
             Identifying Targets...
           </CardTitle>
           <CardDescription>Analyzing potential targets for {disease}</CardDescription>

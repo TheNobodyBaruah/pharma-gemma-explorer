@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Flask, AtomIcon, Brain } from 'lucide-react';
+import { Beaker, AtomIcon, Brain } from 'lucide-react';
 
 const Header: React.FC = () => {
   return (
@@ -8,7 +8,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto flex items-center justify-between px-4">
         <div className="flex items-center gap-2">
           <div className="rounded-full bg-white p-2 shadow-sm">
-            <Flask className="h-6 w-6 text-pharma-700" />
+            <Beaker className="h-6 w-6 text-pharma-700" />
           </div>
           <div>
             <h1 className="text-xl font-bold text-white md:text-2xl">TxAI Assistant</h1>
