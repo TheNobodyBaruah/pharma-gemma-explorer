@@ -1,7 +1,8 @@
+
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { ButtonColorful } from "@/components/ui/button-colorful";
-import { Layout } from "@/components/ui/layout";
+import Layout from "@/components/Layout";
 
 const NotFound: React.FC = () => {
   const location = useLocation();
