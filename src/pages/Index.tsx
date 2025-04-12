@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import DiseaseInput from '@/components/DiseaseInput';
 import TargetList from '@/components/TargetList';
@@ -13,7 +12,6 @@ import { api } from '@/services/api';
 import { mockChatMessages } from '@/lib/mockData';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
-import { Button } from '@/components/ui/button';
 
 const Index: React.FC = () => {
   const { toast } = useToast();
@@ -147,13 +145,6 @@ const Index: React.FC = () => {
         <p className="mt-2 text-muted-foreground">
           Discover potential therapeutic targets and molecules for disease treatment
         </p>
-        <div className="mt-4">
-          <Link to="/glowing-effect-demo">
-            <Button variant="outline" className="border-pharma-500 text-pharma-500 hover:bg-pharma-50">
-              View Glowing Effect Demo
-            </Button>
-          </Link>
-        </div>
       </div>
       
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
