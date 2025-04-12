@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { SendHorizontal, Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ButtonColorful } from '@/components/ui/button-colorful';
 import { Input } from '@/components/ui/input';
 import { ChatMessage } from '@/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -98,17 +98,19 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
             className="flex-1"
             aria-label="Chat message"
           />
-          <Button 
+          <ButtonColorful 
             type="submit" 
             disabled={!message.trim() || isLoading}
             aria-label="Send message"
+            label=""
+            className="px-3"
           >
             {isLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
               <SendHorizontal className="h-4 w-4" />
             )}
-          </Button>
+          </ButtonColorful>
         </form>
       </CardFooter>
     </Card>

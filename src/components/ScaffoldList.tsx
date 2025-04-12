@@ -1,8 +1,9 @@
 
 import React from 'react';
 import { Scaffold } from '@/types';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, Eye } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ButtonColorful } from '@/components/ui/button-colorful';
 
 interface ScaffoldListProps {
   scaffolds: Scaffold[] | null;
@@ -64,27 +65,29 @@ const ScaffoldList: React.FC<ScaffoldListProps> = ({
           {scaffolds.map((scaffold) => (
             <div
               key={scaffold.id}
-              className="cursor-pointer rounded-lg border p-4 transition-all hover:border-pharma-300 hover:shadow-sm"
-              onClick={() => !scaffold.processingError && onViewScaffold(scaffold.smiles)}
+              className="rounded-lg border p-4 transition-all hover:border-pharma-300"
             >
               <div className="flex justify-between">
                 <h3 className="font-medium">
                   {scaffold.name || `Scaffold ${scaffold.id}`}
                 </h3>
-                {scaffold.processingError ? (
-                  <span className="flex items-center text-xs text-destructive">
-                    <AlertCircle className="mr-1 h-3 w-3" />
-                    Error
-                  </span>
-                ) : (
-                  <span className="text-xs text-muted-foreground">View structure</span>
-                )}
               </div>
               <div className="mt-2 overflow-hidden text-ellipsis whitespace-nowrap text-xs font-mono text-muted-foreground">
                 {scaffold.smiles}
               </div>
-              {scaffold.processingError && (
-                <p className="mt-1 text-xs text-destructive">{scaffold.processingError}</p>
+              {scaffold.processingError ? (
+                <div className="mt-3 flex items-center text-xs text-destructive">
+                  <AlertCircle className="mr-1 h-3 w-3" />
+                  <span>Error: {scaffold.processingError}</span>
+                </div>
+              ) : (
+                <div className="mt-3">
+                  <ButtonColorful
+                    label="View Structure"
+                    className="h-8 text-xs"
+                    onClick={() => onViewScaffold(scaffold.smiles)}
+                  />
+                </div>
               )}
             </div>
           ))}

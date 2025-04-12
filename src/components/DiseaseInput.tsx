@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ButtonColorful } from '@/components/ui/button-colorful';
 import { Input } from '@/components/ui/input';
 
 interface DiseaseInputProps {
@@ -37,24 +37,16 @@ const DiseaseInput: React.FC<DiseaseInputProps> = ({ onSearch, isLoading = false
           />
           <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
         </div>
-        <Button 
+        <ButtonColorful 
           type="submit" 
           className="w-full" 
           disabled={!disease.trim() || isLoading}
-          variant="default"
+          label={isLoading ? "Searching..." : "Find Targets"}
         >
-          {isLoading ? (
-            <>
-              <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
-              Searching...
-            </>
-          ) : (
-            <>
-              <Search className="mr-2 h-4 w-4" />
-              Find Targets
-            </>
+          {isLoading && (
+            <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
           )}
-        </Button>
+        </ButtonColorful>
       </form>
     </div>
   );
