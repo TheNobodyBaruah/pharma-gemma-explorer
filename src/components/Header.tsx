@@ -10,9 +10,12 @@ const Header: React.FC = () => {
           <div className="rounded-full bg-white p-2 shadow-sm">
             <Beaker className="h-6 w-6 text-pharma-700" />
           </div>
-          <div>
-            <h1 className="text-xl font-bold text-white md:text-2xl">TxAI Assistant</h1>
-            <p className="text-xs text-pharma-100 md:text-sm">Therapeutic Development Platform</p>
+          <div className="flex items-center">
+            <img 
+              src="/lovable-uploads/11c2e267-7256-4e84-83c7-60ca7cd6fdd5.png" 
+              alt="TheraSpark" 
+              className="h-8 md:h-10"
+            />
           </div>
         </div>
         
