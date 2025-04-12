@@ -50,11 +50,24 @@ const LandingPage: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
+            className="mb-8"
+          >
+            <img 
+              src="/lovable-uploads/6d30faab-ebd9-41d1-9298-37e859e574fe.png" 
+              alt="TheraSpark Logo" 
+              className="w-full max-w-xl mx-auto mb-8 drop-shadow-[0_0_25px_rgba(137,108,219,0.7)]"
+            />
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
             className="mb-6"
           >
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-              TheraSpark: Ignite Your Therapeutic Discovery
+              Ignite Your Therapeutic Discovery
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
               Leverage AI to uncover novel drug targets and molecules faster than ever
@@ -64,7 +77,7 @@ const LandingPage: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link to="/app">
