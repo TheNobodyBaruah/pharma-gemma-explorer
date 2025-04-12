@@ -1,8 +1,9 @@
+
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import { SimplexNoise } from "simplex-noise";
+import { createNoise3D } from "simplex-noise";
 
 interface VortexProps extends React.HTMLAttributes<HTMLDivElement> {
   backgroundColor?: string;
@@ -64,7 +65,7 @@ export function Vortex({
     if (!ctx) return;
 
     // Initialize particles
-    const simplex = new SimplexNoise();
+    const noise3D = createNoise3D();
     const particles: {
       x: number;
       y: number;
@@ -105,12 +106,12 @@ export function Vortex({
 
       for (const particle of particles) {
         // Update position based on noise
-        const noiseX = simplex.noise3D(
+        const noiseX = noise3D(
           particle.x * 0.003,
           particle.y * 0.003,
           time * 0.01 + particle.noise
         );
-        const noiseY = simplex.noise3D(
+        const noiseY = noise3D(
           particle.x * 0.003 + 100,
           particle.y * 0.003 + 100,
           time * 0.01 + particle.noise
