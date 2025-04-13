@@ -100,7 +100,7 @@ const LandingPage: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* Spline Section */}
+          {/* Spline Section with public demo scene */}
           <motion.div 
             className="w-full max-w-md lg:w-1/2 h-[400px] lg:h-[500px] order-1 lg:order-2 flex items-center justify-center"
             initial={{ opacity: 0, x: 20 }}
@@ -108,7 +108,7 @@ const LandingPage: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <InteractiveSplineSection
-              sceneUrl="https://prod.spline.design/brO0kNMm3W-LQ/scene.splinecode"
+              sceneUrl="https://prod.spline.design/Ee2-f8AWtdny0MeB/scene.splinecode"
               spotlightFill='rgba(180, 210, 255, 0.4)'
               spotlightSize={600}
               className="rounded-lg"
