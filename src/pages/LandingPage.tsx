@@ -6,7 +6,6 @@ import { Rocket, Target, Lightbulb, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import InteractiveLogo from '@/components/ui/InteractiveLogo';
-import { InteractiveSplineSection } from '@/components/sections/InteractiveSplineSection';
 
 const FeatureCard = ({ 
   icon: Icon, 
@@ -48,15 +47,17 @@ const LandingPage: React.FC = () => {
       rangeSpeed={1.5}
     >
       <div className="min-h-screen">
-        {/* Hero Section - Modified to include Spline section */}
-        <section className="relative min-h-screen flex flex-col lg:flex-row justify-center items-center px-4 py-16 gap-8 lg:gap-16">
-          <div className="lg:w-1/2 text-center lg:text-left order-2 lg:order-1">
+        {/* Hero Section */}
+        <section className="relative min-h-screen flex flex-col justify-center items-center px-4">
+          {/* Placeholder for full-screen WebGL background component */}
+          <div className="container mx-auto text-center z-10">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               className="mb-8"
             >
+              {/* Logo animation (fade/scale) to be added via GSAP */}
               <InteractiveLogo
                 imageUrl="/lovable-uploads/5ac55eb2-8261-4a9f-bbb6-e464e27929d4.png"
                 className="w-full max-w-xl mx-auto mb-8 drop-shadow-[0_0_25px_rgba(137,108,219,0.7)]"
@@ -86,8 +87,9 @@ const LandingPage: React.FC = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
+              {/* Button animations (fade/slide + hover) to be added */}
               <Link to="/app">
                 <ButtonColorful label="Get Started" />
               </Link>
@@ -99,22 +101,6 @@ const LandingPage: React.FC = () => {
               </Link>
             </motion.div>
           </div>
-
-          {/* Spline Section with public demo scene */}
-          <motion.div 
-            className="w-full max-w-md lg:w-1/2 h-[400px] lg:h-[500px] order-1 lg:order-2 flex items-center justify-center"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <InteractiveSplineSection
-              // Use a different public Spline scene URL
-              sceneUrl="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"
-              spotlightFill='rgba(180, 210, 255, 0.4)'
-              spotlightSize={600}
-              className="rounded-lg"
-            />
-          </motion.div>
         </section>
 
         {/* Features Section */}
