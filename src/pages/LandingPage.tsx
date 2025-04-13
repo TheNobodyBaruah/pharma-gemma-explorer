@@ -29,7 +29,7 @@ const FeatureCard = ({
       <div className="rounded-full bg-accent/20 p-4 mb-4">
         <Icon className="h-8 w-8 text-accent" />
       </div>
-      <h3 className="text-xl font-bold mb-2 text-white">{title}</h3>
+      <h3 className="text-xl font-bold mb-2 text-white text-metallic">{title}</h3>
       <p className="text-gray-300 text-center">{description}</p>
     </motion.div>
   );
@@ -75,7 +75,7 @@ const LandingPage: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="mb-6"
             >
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">
+              <h1 className="text-4xl md:text-6xl font-bold mb-4 text-metallic">
                 Ignite Your Therapeutic Discovery
               </h1>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
@@ -112,7 +112,7 @@ const LandingPage: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
-                className="text-3xl md:text-4xl font-bold text-white mb-4"
+                className="text-3xl md:text-4xl font-bold mb-4 text-metallic text-metallic-3d"
               >
                 Accelerate Your Research
               </motion.h2>
@@ -157,7 +157,7 @@ const LandingPage: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-4xl font-bold text-white mb-6"
+              className="text-3xl md:text-4xl font-bold mb-6 text-metallic"
             >
               Ready to Transform Your Research?
             </motion.h2>
