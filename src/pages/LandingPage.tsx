@@ -108,7 +108,8 @@ const LandingPage: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <InteractiveSplineSection
-              sceneUrl="https://prod.spline.design/Ee2-f8AWtdny0MeB/scene.splinecode"
+              // Use a different public Spline scene URL
+              sceneUrl="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"
               spotlightFill='rgba(180, 210, 255, 0.4)'
               spotlightSize={600}
               className="rounded-lg"
