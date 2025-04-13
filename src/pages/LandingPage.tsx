@@ -24,6 +24,7 @@ const FeatureCard = ({
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
+      {/* Icon animation (morphing/glow) placeholder */}
       <div className="rounded-full bg-accent/20 p-4 mb-4">
         <Icon className="h-8 w-8 text-accent" />
       </div>
@@ -46,7 +47,8 @@ const LandingPage: React.FC = () => {
     >
       <div className="min-h-screen">
         {/* Hero Section */}
-        <div className="relative min-h-screen flex flex-col justify-center items-center px-4">
+        <section className="relative min-h-screen flex flex-col justify-center items-center px-4">
+          {/* Placeholder for full-screen WebGL background component */}
           <div className="container mx-auto text-center z-10">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -54,6 +56,7 @@ const LandingPage: React.FC = () => {
               transition={{ duration: 0.8 }}
               className="mb-8"
             >
+              {/* Logo animation (fade/scale) to be added via GSAP */}
               <img 
                 src="/lovable-uploads/6d30faab-ebd9-41d1-9298-37e859e574fe.png" 
                 alt="TheraSpark Logo" 
@@ -67,7 +70,7 @@ const LandingPage: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="mb-6"
             >
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">
                 Ignite Your Therapeutic Discovery
               </h1>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
@@ -81,8 +84,9 @@ const LandingPage: React.FC = () => {
               transition={{ delay: 0.6, duration: 0.5 }}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
+              {/* Button animations (fade/slide + hover) to be added */}
               <Link to="/app">
-                <ButtonColorful label="Get Started" />
+                <ButtonColorful label="Get Started" rightIcon={<ArrowRight size={16} />} />
               </Link>
               <Link to="#features">
                 <ButtonColorful 
@@ -92,7 +96,7 @@ const LandingPage: React.FC = () => {
               </Link>
             </motion.div>
           </div>
-        </div>
+        </section>
 
         {/* Features Section */}
         <section id="features" className="py-20">
@@ -118,6 +122,7 @@ const LandingPage: React.FC = () => {
               </motion.p>
             </div>
 
+            {/* Card entrance animations (stagger) to be added via GSAP */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <FeatureCard 
                 icon={Target} 
@@ -141,6 +146,7 @@ const LandingPage: React.FC = () => {
         {/* CTA Section */}
         <section className="py-20">
           <div className="container mx-auto px-4 text-center">
+            {/* CTA text/button animations to be added */}
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -160,6 +166,7 @@ const LandingPage: React.FC = () => {
               <Link to="/app">
                 <ButtonColorful 
                   label="Start Discovering Now" 
+                  rightIcon={<ArrowRight size={16} />}
                   className="text-lg px-8 py-6"
                 />
               </Link>
@@ -168,7 +175,7 @@ const LandingPage: React.FC = () => {
         </section>
 
         {/* Footer */}
-        <footer className="py-8">
+        <footer className="py-8 border-t border-gray-800">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
               <p>© {new Date().getFullYear()} TheraSpark. All rights reserved.</p>
