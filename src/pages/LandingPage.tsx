@@ -5,6 +5,7 @@ import { ButtonColorful } from "@/components/ui/button-colorful";
 import { Rocket, Target, Lightbulb, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import InteractiveLogo from '@/components/ui/InteractiveLogo';
 
 const FeatureCard = ({ 
   icon: Icon, 
@@ -57,10 +58,14 @@ const LandingPage: React.FC = () => {
               className="mb-8"
             >
               {/* Logo animation (fade/scale) to be added via GSAP */}
-              <img 
-                src="/lovable-uploads/6d30faab-ebd9-41d1-9298-37e859e574fe.png" 
-                alt="TheraSpark Logo" 
+              <InteractiveLogo
+                imageUrl="/lovable-uploads/5ac55eb2-8261-4a9f-bbb6-e464e27929d4.png"
                 className="w-full max-w-xl mx-auto mb-8 drop-shadow-[0_0_25px_rgba(137,108,219,0.7)]"
+                glowColor={0x9333EA} 
+                glowIntensity={1.8}
+                glowRadius={0.3}
+                baseBrightness={1.1}
+                style={{ aspectRatio: '1 / 1' }} 
               />
             </motion.div>
             
@@ -86,7 +91,7 @@ const LandingPage: React.FC = () => {
             >
               {/* Button animations (fade/slide + hover) to be added */}
               <Link to="/app">
-                <ButtonColorful label="Get Started" rightIcon={<ArrowRight size={16} />} />
+                <ButtonColorful label="Get Started" />
               </Link>
               <Link to="#features">
                 <ButtonColorful 
@@ -166,7 +171,6 @@ const LandingPage: React.FC = () => {
               <Link to="/app">
                 <ButtonColorful 
                   label="Start Discovering Now" 
-                  rightIcon={<ArrowRight size={16} />}
                   className="text-lg px-8 py-6"
                 />
               </Link>
