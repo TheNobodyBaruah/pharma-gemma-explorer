@@ -2,9 +2,11 @@
 import React from 'react';
 import { Vortex } from "@/components/ui/vortex";
 import { ButtonColorful } from "@/components/ui/button-colorful";
+import { Button } from "@/components/ui/button";
 import { Rocket, Target, Lightbulb, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { FlipCard, FlipCardFront, FlipCardBack } from "@/components/ui/flip-card";
 import InteractiveLogo from '@/components/ui/InteractiveLogo';
 
 const FeatureCard = ({ 
@@ -17,25 +19,41 @@ const FeatureCard = ({
   description: string 
 }) => {
   return (
-    <motion.div 
-      className="flex flex-col items-center p-6 bg-white/10 backdrop-blur-lg rounded-xl shadow-xl"
-      whileHover={{ y: -5, transition: { duration: 0.2 } }}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-    >
-      {/* Icon animation (morphing/glow) placeholder */}
+    <div className="flex flex-col items-center p-6 h-full">
       <div className="rounded-full bg-accent/20 p-4 mb-4">
         <Icon className="h-8 w-8 text-accent" />
       </div>
       <h3 className="text-xl font-bold mb-2 text-white text-metallic">{title}</h3>
       <p className="text-gray-300 text-center">{description}</p>
-    </motion.div>
+    </div>
   );
 };
 
 const LandingPage: React.FC = () => {
+  const featureData = [
+    {
+      icon: Target,
+      title: "AI-Powered Target ID",
+      description: "Identify promising therapeutic targets with our advanced AI algorithms trained on comprehensive biomedical data.",
+      image: "/lovable-uploads/2c766d4e-1d71-4a73-aff2-9bc911deb7d1.png",
+      alt: "AI Target Identification Visualization"
+    },
+    {
+      icon: Rocket,
+      title: "Novel Molecule Generation",
+      description: "Generate and evaluate innovative molecular structures tailored to your specific research needs.",
+      image: "/lovable-uploads/403afd8e-7dd8-4ef8-ac9c-c15eac858616.png",
+      alt: "Novel Molecule Generation"
+    },
+    {
+      icon: Lightbulb,
+      title: "Actionable Insights",
+      description: "Receive clear, actionable recommendations supported by evidence-based analysis of complex biological interactions.",
+      image: "/lovable-uploads/32dfc21e-69eb-472f-9e8c-daf7ee99cc90.png",
+      alt: "Actionable Insights Visualization"
+    }
+  ];
+
   return (
     <Vortex 
       className="min-h-screen"
@@ -129,21 +147,44 @@ const LandingPage: React.FC = () => {
 
             {/* Card entrance animations (stagger) to be added via GSAP */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <FeatureCard 
-                icon={Target} 
-                title="AI-Powered Target ID" 
-                description="Identify promising therapeutic targets with our advanced AI algorithms trained on comprehensive biomedical data."
-              />
-              <FeatureCard 
-                icon={Rocket} 
-                title="Novel Molecule Generation" 
-                description="Generate and evaluate innovative molecular structures tailored to your specific research needs."
-              />
-              <FeatureCard 
-                icon={Lightbulb} 
-                title="Actionable Insights" 
-                description="Receive clear, actionable recommendations supported by evidence-based analysis of complex biological interactions."
-              />
+              {featureData.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2, duration: 0.5 }}
+                >
+                  <FlipCard 
+                    className="h-96 rounded-xl shadow-xl bg-white/10 backdrop-blur-lg"
+                    flipDirection={index % 2 === 0 ? "horizontal" : "vertical"}
+                  >
+                    <FlipCardFront className="rounded-xl p-6 bg-white/5 backdrop-blur-lg">
+                      <FeatureCard
+                        icon={feature.icon}
+                        title={feature.title}
+                        description={feature.description}
+                      />
+                    </FlipCardFront>
+                    <FlipCardBack className="rounded-xl overflow-hidden bg-black">
+                      <img
+                        src={feature.image}
+                        alt={feature.alt}
+                        className="object-cover w-full h-full"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                        <h3 className="text-xl font-bold mb-2 text-metallic">{feature.title}</h3>
+                        <Button 
+                          variant="outline" 
+                          className="bg-transparent border-white/40 text-white hover:bg-white/10 mt-2 w-fit"
+                        >
+                          Learn More
+                        </Button>
+                      </div>
+                    </FlipCardBack>
+                  </FlipCard>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
