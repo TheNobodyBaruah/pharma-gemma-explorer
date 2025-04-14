@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Vortex } from "@/components/ui/vortex";
 import { ButtonColorful } from "@/components/ui/button-colorful";
@@ -23,7 +22,7 @@ const FeatureCard = ({
       <div className="rounded-full bg-accent/20 p-4 mb-4">
         <Icon className="h-8 w-8 text-accent" />
       </div>
-      <h3 className="text-xl font-bold mb-2 text-white text-metallic">{title}</h3>
+      <h3 className="text-xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-slate-300 to-blue-500">{title}</h3>
       <p className="text-gray-300 text-center">{description}</p>
     </div>
   );
@@ -93,7 +92,7 @@ const LandingPage: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="mb-6"
             >
-              <h1 className="text-4xl md:text-6xl font-bold mb-4 text-metallic">
+              <h1 className="text-4xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-slate-300 via-blue-200 to-blue-500">
                 Ignite Your Therapeutic Discovery
               </h1>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
@@ -130,7 +129,7 @@ const LandingPage: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
-                className="text-3xl md:text-4xl font-bold mb-4 text-metallic text-metallic-3d"
+                className="text-3xl md:text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-slate-300 via-blue-200 to-blue-500"
               >
                 Accelerate Your Research
               </motion.h2>
@@ -166,7 +165,7 @@ const LandingPage: React.FC = () => {
                         className="object-cover w-full h-full"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                        <h3 className="text-xl font-bold mb-2 text-metallic">{feature.title}</h3>
+                        <h3 className="text-xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-slate-300 via-blue-200 to-blue-500">{feature.title}</h3>
                         <Button 
                           variant="ghost" 
                           className="bg-white/10 hover:bg-white/20 text-white mt-2 w-fit"
@@ -198,7 +197,7 @@ const LandingPage: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="text-3xl md:text-4xl font-bold mb-6 text-metallic"
+              className="text-3xl md:text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-slate-300 via-blue-200 to-blue-500"
             >
               Ready to Transform Your Research?
             </motion.h2>
