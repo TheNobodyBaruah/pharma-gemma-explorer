@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Vortex } from "@/components/ui/vortex";
 import { ButtonColorful } from "@/components/ui/button-colorful";
@@ -105,7 +106,7 @@ const LandingPage: React.FC = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
             >
               {/* Button animations (fade/slide + hover) to be added */}
               <Link to="/app">
@@ -125,37 +126,45 @@ const LandingPage: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
               viewport={{ once: true }}
-              className="mt-16 mb-16"
+              className="mb-16 px-4"
             >
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 justify-items-center">
-                <GlareCard className="flex flex-col items-center justify-center">
-                  <img
-                    className="h-full w-full absolute inset-0 object-cover"
-                    src="/lovable-uploads/d2e4a739-893b-40db-af15-1bc820b91dac.png"
-                    alt="Select Disease"
-                  />
-                </GlareCard>
-                <GlareCard className="flex flex-col items-center justify-center">
-                  <img
-                    className="h-full w-full absolute inset-0 object-cover"
-                    src="/lovable-uploads/b3800e59-e7f0-43fa-bb62-9f0ef93f50ea.png"
-                    alt="Obtain Protein Targets"
-                  />
-                </GlareCard>
-                <GlareCard className="flex flex-col items-center justify-center">
-                  <img
-                    className="h-full w-full absolute inset-0 object-cover"
-                    src="/lovable-uploads/faca3d4b-8243-4807-90ff-013bec9139de.png"
-                    alt="Potential Therapeutic Molecules"
-                  />
-                </GlareCard>
-                <GlareCard className="flex flex-col items-center justify-center">
-                  <img
-                    className="h-full w-full absolute inset-0 object-cover"
-                    src="/lovable-uploads/d805f723-e535-4807-a0fa-5c6a172d34b7.png"
-                    alt="Chat with AI Chemist"
-                  />
-                </GlareCard>
+              <div className="flex flex-wrap justify-center gap-6">
+                <div className="w-[320px]">
+                  <GlareCard className="flex flex-col items-center justify-center">
+                    <img
+                      className="h-full w-full absolute inset-0 object-cover"
+                      src="/lovable-uploads/d2e4a739-893b-40db-af15-1bc820b91dac.png"
+                      alt="Select Disease"
+                    />
+                  </GlareCard>
+                </div>
+                <div className="w-[320px]">
+                  <GlareCard className="flex flex-col items-center justify-center">
+                    <img
+                      className="h-full w-full absolute inset-0 object-cover"
+                      src="/lovable-uploads/b3800e59-e7f0-43fa-bb62-9f0ef93f50ea.png"
+                      alt="Obtain Protein Targets"
+                    />
+                  </GlareCard>
+                </div>
+                <div className="w-[320px]">
+                  <GlareCard className="flex flex-col items-center justify-center">
+                    <img
+                      className="h-full w-full absolute inset-0 object-cover"
+                      src="/lovable-uploads/faca3d4b-8243-4807-90ff-013bec9139de.png"
+                      alt="Potential Therapeutic Molecules"
+                    />
+                  </GlareCard>
+                </div>
+                <div className="w-[320px]">
+                  <GlareCard className="flex flex-col items-center justify-center">
+                    <img
+                      className="h-full w-full absolute inset-0 object-cover"
+                      src="/lovable-uploads/d805f723-e535-4807-a0fa-5c6a172d34b7.png"
+                      alt="Chat with AI Chemist"
+                    />
+                  </GlareCard>
+                </div>
               </div>
             </motion.div>
           </div>
