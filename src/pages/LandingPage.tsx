@@ -159,14 +159,7 @@ const LandingPage: React.FC = () => {
                     className="h-96 rounded-xl shadow-xl bg-white/10 backdrop-blur-lg"
                     flipDirection={index % 2 === 0 ? "horizontal" : "vertical"}
                   >
-                    <FlipCardFront className="rounded-xl p-6 bg-white/5 backdrop-blur-lg">
-                      <FeatureCard
-                        icon={feature.icon}
-                        title={feature.title}
-                        description={feature.description}
-                      />
-                    </FlipCardFront>
-                    <FlipCardBack className="rounded-xl overflow-hidden bg-black">
+                    <FlipCardFront className="rounded-xl overflow-hidden bg-black">
                       <img
                         src={feature.image}
                         alt={feature.alt}
@@ -175,12 +168,19 @@ const LandingPage: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
                         <h3 className="text-xl font-bold mb-2 text-metallic">{feature.title}</h3>
                         <Button 
-                          variant="outline" 
-                          className="bg-transparent border-white/40 text-white hover:bg-white/10 mt-2 w-fit"
+                          variant="ghost" 
+                          className="bg-white/10 hover:bg-white/20 text-white mt-2 w-fit"
                         >
-                          Learn More
+                          Hover to learn more
                         </Button>
                       </div>
+                    </FlipCardFront>
+                    <FlipCardBack className="rounded-xl p-6 bg-white/5 backdrop-blur-lg">
+                      <FeatureCard
+                        icon={feature.icon}
+                        title={feature.title}
+                        description={feature.description}
+                      />
                     </FlipCardBack>
                   </FlipCard>
                 </motion.div>
