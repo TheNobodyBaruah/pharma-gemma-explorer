@@ -9,6 +9,13 @@ import { Link } from 'react-router-dom';
 import { FlipCard, FlipCardFront, FlipCardBack } from "@/components/ui/flip-card";
 import InteractiveLogo from '@/components/ui/InteractiveLogo';
 import { GlareCard } from "@/components/ui/glare-card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from "@/components/ui/carousel";
 
 const FeatureCard = ({ 
   icon: Icon, 
@@ -128,43 +135,65 @@ const LandingPage: React.FC = () => {
               viewport={{ once: true }}
               className="mb-16 px-4"
             >
-              <div className="flex flex-wrap justify-center gap-6">
-                <div className="w-[320px]">
-                  <GlareCard className="flex flex-col items-center justify-center">
-                    <img
-                      className="h-full w-full absolute inset-0 object-cover"
-                      src="/lovable-uploads/d2e4a739-893b-40db-af15-1bc820b91dac.png"
-                      alt="Select Disease"
-                    />
-                  </GlareCard>
-                </div>
-                <div className="w-[320px]">
-                  <GlareCard className="flex flex-col items-center justify-center">
-                    <img
-                      className="h-full w-full absolute inset-0 object-cover"
-                      src="/lovable-uploads/b3800e59-e7f0-43fa-bb62-9f0ef93f50ea.png"
-                      alt="Obtain Protein Targets"
-                    />
-                  </GlareCard>
-                </div>
-                <div className="w-[320px]">
-                  <GlareCard className="flex flex-col items-center justify-center">
-                    <img
-                      className="h-full w-full absolute inset-0 object-cover"
-                      src="/lovable-uploads/faca3d4b-8243-4807-90ff-013bec9139de.png"
-                      alt="Potential Therapeutic Molecules"
-                    />
-                  </GlareCard>
-                </div>
-                <div className="w-[320px]">
-                  <GlareCard className="flex flex-col items-center justify-center">
-                    <img
-                      className="h-full w-full absolute inset-0 object-cover"
-                      src="/lovable-uploads/d805f723-e535-4807-a0fa-5c6a172d34b7.png"
-                      alt="Chat with AI Chemist"
-                    />
-                  </GlareCard>
-                </div>
+              <div className="relative w-full max-w-5xl mx-auto">
+                <Carousel
+                  opts={{
+                    align: "start",
+                    loop: true,
+                  }}
+                  className="w-full"
+                >
+                  <CarouselContent className="py-4">
+                    <CarouselItem className="md:basis-1/2 lg:basis-1/4 pl-4">
+                      <div className="h-[480px]">
+                        <GlareCard className="flex flex-col items-center justify-center">
+                          <img
+                            className="h-full w-full absolute inset-0 object-contain"
+                            src="/lovable-uploads/d2e4a739-893b-40db-af15-1bc820b91dac.png"
+                            alt="Select Disease"
+                          />
+                        </GlareCard>
+                      </div>
+                    </CarouselItem>
+                    <CarouselItem className="md:basis-1/2 lg:basis-1/4 pl-4">
+                      <div className="h-[480px]">
+                        <GlareCard className="flex flex-col items-center justify-center">
+                          <img
+                            className="h-full w-full absolute inset-0 object-contain"
+                            src="/lovable-uploads/b3800e59-e7f0-43fa-bb62-9f0ef93f50ea.png"
+                            alt="Obtain Protein Targets"
+                          />
+                        </GlareCard>
+                      </div>
+                    </CarouselItem>
+                    <CarouselItem className="md:basis-1/2 lg:basis-1/4 pl-4">
+                      <div className="h-[480px]">
+                        <GlareCard className="flex flex-col items-center justify-center">
+                          <img
+                            className="h-full w-full absolute inset-0 object-contain"
+                            src="/lovable-uploads/faca3d4b-8243-4807-90ff-013bec9139de.png"
+                            alt="Potential Therapeutic Molecules"
+                          />
+                        </GlareCard>
+                      </div>
+                    </CarouselItem>
+                    <CarouselItem className="md:basis-1/2 lg:basis-1/4 pl-4">
+                      <div className="h-[480px]">
+                        <GlareCard className="flex flex-col items-center justify-center">
+                          <img
+                            className="h-full w-full absolute inset-0 object-contain"
+                            src="/lovable-uploads/d805f723-e535-4807-a0fa-5c6a172d34b7.png"
+                            alt="Chat with AI Chemist"
+                          />
+                        </GlareCard>
+                      </div>
+                    </CarouselItem>
+                  </CarouselContent>
+                  <div className="flex items-center justify-center mt-4 gap-2">
+                    <CarouselPrevious className="relative static left-0 translate-y-0 mx-2" />
+                    <CarouselNext className="relative static right-0 translate-y-0 mx-2" />
+                  </div>
+                </Carousel>
               </div>
             </motion.div>
           </div>
