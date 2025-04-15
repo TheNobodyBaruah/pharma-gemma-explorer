@@ -10,6 +10,7 @@ try:
     logging.info(f"Initialized Vertex AI client with project: {config.GCP_PROJECT}, location: {config.GCP_LOCATION}")
     
     # Initialize model
+    # NOTE: Ensure the model name in .env matches exactly the TxGemma model ID from Vertex AI Model Garden
     model = GenerativeModel(config.MODEL_NAME)
     logging.info(f"Initialized GenerativeModel with model: {config.MODEL_NAME}")
 except Exception as e:
@@ -36,9 +37,17 @@ def query_llm(prompt: str) -> str:
     try:
         # Configure generation parameters
         generation_config = GenerationConfig(
-            temperature=0.2,
-            max_output_tokens=1024
+            temperature=0.2,  # REVIEW/ADJUST: Optimal temperature might differ for TxGemma-27B
+            max_output_tokens=1024  # REVIEW/ADJUST: TxGemma-27B might handle/require more tokens
+            # Consider additional parameters for TxGemma-27B:
+            # top_p=0.9,
+            # top_k=40
         )
+        
+        # NOTE: Review if TxGemma-27B requires a specific input format
+        # (e.g., structured messages like [{"role": "user", "parts": [prompt]}])
+        # instead of just a plain text prompt string. Adjust the 'prompt' variable
+        # passed to generate_content if necessary based on model requirements.
         
         # Generate content
         response = model.generate_content(
@@ -47,6 +56,7 @@ def query_llm(prompt: str) -> str:
         )
         
         # Extract text from response
+        # REVIEW/ADJUST: Check if TxGemma-27B returns responses in a different format
         if response and hasattr(response, 'text'):
             return response.text
         elif response and hasattr(response, 'candidates') and response.candidates:

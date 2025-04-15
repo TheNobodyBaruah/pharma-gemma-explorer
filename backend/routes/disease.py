@@ -17,6 +17,7 @@ async def generate_targets(request: DiseaseRequest):
     logging.info(f"Received request for targets for disease: {request.disease}")
     
     # Construct the prompt for the LLM
+    # REVIEW/ADJUST prompt phrasing for optimal TxGemma-27B target generation
     prompt = f"""Identify potential drug target receptors associated with the disease "{request.disease}".
 
     Please provide the response as a comma-separated list of target receptor names or symbols.
@@ -31,6 +32,8 @@ async def generate_targets(request: DiseaseRequest):
         logging.debug(f"Raw LLM response for {request.disease}: {raw_response}")
         
         # Parse the response
+        # REVIEW/ADJUST parsing: Check TxGemma-27B output format for target lists 
+        # (e.g., comma-separated, newline-separated, JSON?)
         if not raw_response:
             targets = []
         else:

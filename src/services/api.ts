@@ -36,12 +36,32 @@ export const api = {
     }
   },
   
-  // Get molecules for a target - still using mock data
+  // Get molecules for a target - using the new backend endpoint
   async getMolecules(targetId: string): Promise<Molecule[]> {
     console.log(`Fetching molecules for target: ${targetId}`);
-    // Simulate API call
-    await delay(1800);
-    return mockMolecules.filter(molecule => molecule.target === targetId);
+    try {
+      // Extract target name from ID (assuming format like "target-0")
+      const targetName = targetId.split('-')[1] ? mockTargets[parseInt(targetId.split('-')[1])].name : targetId;
+      
+      const response = await axios.post(`${API_BASE_URL}/target/`, {
+        target: targetName,
+        count: 5
+      });
+      
+      if (response.data && Array.isArray(response.data.molecules)) {
+        return response.data.molecules;
+      } else {
+        console.error("Invalid response structure from /target endpoint:", response.data);
+        // Fallback to mock data
+        await delay(1800);
+        return mockMolecules.filter(molecule => molecule.target === targetId);
+      }
+    } catch (error) {
+      console.error('Error fetching molecules:', error);
+      // Fallback to mock data
+      await delay(1800);
+      return mockMolecules.filter(molecule => molecule.target === targetId);
+    }
   },
   
   // Get scaffolds for a target - still using mock data
@@ -55,16 +75,42 @@ export const api = {
       scaffold.parentMoleculeId && moleculeIds.includes(scaffold.parentMoleculeId));
   },
   
-  // Send chat message - still using mock data
+  // Send chat message - using the new chat endpoint
   async sendChatMessage(message: string): Promise<ChatMessage> {
     console.log(`Sending chat message: ${message}`);
-    // Simulate API call
-    await delay(2000);
-    return {
-      id: `msg-${Date.now()}`,
-      role: 'assistant',
-      content: `This is a simulated response to: "${message}". In a real application, this would come from TxGemma via Vertex AI.`,
-      timestamp: Date.now(),
-    };
+    try {
+      const response = await axios.post(`${API_BASE_URL}/chat/`, {
+        message: message
+      });
+      
+      if (response.data && response.data.response) {
+        return {
+          id: `msg-${Date.now()}`,
+          role: 'assistant',
+          content: response.data.response,
+          timestamp: Date.now(),
+        };
+      } else {
+        console.error("Invalid response structure from /chat endpoint:", response.data);
+        // Fallback to mock response
+        await delay(2000);
+        return {
+          id: `msg-${Date.now()}`,
+          role: 'assistant',
+          content: `This is a simulated response to: "${message}". In a real application, this would come from TxGemma via Vertex AI.`,
+          timestamp: Date.now(),
+        };
+      }
+    } catch (error) {
+      console.error('Error sending chat message:', error);
+      // Fallback to mock response
+      await delay(2000);
+      return {
+        id: `msg-${Date.now()}`,
+        role: 'assistant',
+        content: `This is a simulated response to: "${message}". In a real application, this would come from TxGemma via Vertex AI.`,
+        timestamp: Date.now(),
+      };
+    }
   }
 };
