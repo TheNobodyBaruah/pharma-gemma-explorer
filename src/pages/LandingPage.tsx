@@ -62,6 +62,29 @@ const LandingPage: React.FC = () => {
     }
   ];
 
+  const workflowCards = [
+    {
+      image: "/lovable-uploads/d2e4a739-893b-40db-af15-1bc820b91dac.png",
+      title: "SELECT DISEASE",
+      alt: "Select Disease"
+    },
+    {
+      image: "/lovable-uploads/b3800e59-e7f0-43fa-bb62-9f0ef93f50ea.png",
+      title: "OBTAIN PROTEIN TARGETS",
+      alt: "Obtain Protein Targets"
+    },
+    {
+      image: "/lovable-uploads/faca3d4b-8243-4807-90ff-013bec9139de.png",
+      title: "POTENTIAL THERAPEUTIC MOLECULES",
+      alt: "Potential Therapeutic Molecules"
+    },
+    {
+      image: "/lovable-uploads/d805f723-e535-4807-a0fa-5c6a172d34b7.png",
+      title: "CHAT WITH AI CHEMIST",
+      alt: "Chat with AI Chemist"
+    }
+  ];
+
   return (
     <Vortex 
       className="min-h-screen"
@@ -135,63 +158,35 @@ const LandingPage: React.FC = () => {
               viewport={{ once: true }}
               className="mb-16 px-4"
             >
-              <div className="relative w-full max-w-5xl mx-auto">
+              <div className="relative w-full max-w-6xl mx-auto">
                 <Carousel
                   opts={{
-                    align: "start",
+                    align: "center",
                     loop: true,
                   }}
                   className="w-full"
                 >
                   <CarouselContent className="py-4">
-                    <CarouselItem className="md:basis-1/2 lg:basis-1/4 pl-4">
-                      <div className="h-[480px]">
-                        <GlareCard className="flex flex-col items-center justify-center">
-                          <img
-                            className="h-full w-full absolute inset-0 object-contain"
-                            src="/lovable-uploads/d2e4a739-893b-40db-af15-1bc820b91dac.png"
-                            alt="Select Disease"
-                          />
-                        </GlareCard>
-                      </div>
-                    </CarouselItem>
-                    <CarouselItem className="md:basis-1/2 lg:basis-1/4 pl-4">
-                      <div className="h-[480px]">
-                        <GlareCard className="flex flex-col items-center justify-center">
-                          <img
-                            className="h-full w-full absolute inset-0 object-contain"
-                            src="/lovable-uploads/b3800e59-e7f0-43fa-bb62-9f0ef93f50ea.png"
-                            alt="Obtain Protein Targets"
-                          />
-                        </GlareCard>
-                      </div>
-                    </CarouselItem>
-                    <CarouselItem className="md:basis-1/2 lg:basis-1/4 pl-4">
-                      <div className="h-[480px]">
-                        <GlareCard className="flex flex-col items-center justify-center">
-                          <img
-                            className="h-full w-full absolute inset-0 object-contain"
-                            src="/lovable-uploads/faca3d4b-8243-4807-90ff-013bec9139de.png"
-                            alt="Potential Therapeutic Molecules"
-                          />
-                        </GlareCard>
-                      </div>
-                    </CarouselItem>
-                    <CarouselItem className="md:basis-1/2 lg:basis-1/4 pl-4">
-                      <div className="h-[480px]">
-                        <GlareCard className="flex flex-col items-center justify-center">
-                          <img
-                            className="h-full w-full absolute inset-0 object-contain"
-                            src="/lovable-uploads/d805f723-e535-4807-a0fa-5c6a172d34b7.png"
-                            alt="Chat with AI Chemist"
-                          />
-                        </GlareCard>
-                      </div>
-                    </CarouselItem>
+                    {workflowCards.map((card, index) => (
+                      <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4 pl-2 pr-2">
+                        <div className="h-[400px] sm:h-[450px] md:h-[500px]">
+                          <GlareCard className="flex flex-col items-center justify-end p-6">
+                            <img
+                              className="h-3/4 w-3/4 object-contain mb-auto mt-4"
+                              src={card.image}
+                              alt={card.alt}
+                            />
+                            <h3 className="text-xl md:text-2xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-blue-300 to-blue-400 mt-auto">
+                              {card.title}
+                            </h3>
+                          </GlareCard>
+                        </div>
+                      </CarouselItem>
+                    ))}
                   </CarouselContent>
-                  <div className="flex items-center justify-center mt-4 gap-2">
-                    <CarouselPrevious className="relative static left-0 translate-y-0 mx-2" />
-                    <CarouselNext className="relative static right-0 translate-y-0 mx-2" />
+                  <div className="flex items-center justify-center mt-8 gap-4">
+                    <CarouselPrevious className="relative static left-0 translate-y-0 mx-2 bg-slate-700/30 hover:bg-slate-700/60 border-slate-600" />
+                    <CarouselNext className="relative static right-0 translate-y-0 mx-2 bg-slate-700/30 hover:bg-slate-700/60 border-slate-600" />
                   </div>
                 </Carousel>
               </div>
