@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import { mockTargets, mockMolecules, mockScaffolds, mockChatMessages } from '../lib/mockData';
 import { Target, Molecule, Scaffold, ChatMessage } from '../types';
@@ -75,7 +74,7 @@ export const api = {
       scaffold.parentMoleculeId && moleculeIds.includes(scaffold.parentMoleculeId));
   },
   
-  // Send chat message - using the new chat endpoint
+  // Send chat message - using the chat endpoint
   async sendChatMessage(message: string): Promise<ChatMessage> {
     console.log(`Sending chat message: ${message}`);
     try {
@@ -92,25 +91,11 @@ export const api = {
         };
       } else {
         console.error("Invalid response structure from /chat endpoint:", response.data);
-        // Fallback to mock response
-        await delay(2000);
-        return {
-          id: `msg-${Date.now()}`,
-          role: 'assistant',
-          content: `This is a simulated response to: "${message}". In a real application, this would come from TxGemma via Vertex AI.`,
-          timestamp: Date.now(),
-        };
+        throw new Error("Received invalid response format from the AI service");
       }
     } catch (error) {
       console.error('Error sending chat message:', error);
-      // Fallback to mock response
-      await delay(2000);
-      return {
-        id: `msg-${Date.now()}`,
-        role: 'assistant',
-        content: `This is a simulated response to: "${message}". In a real application, this would come from TxGemma via Vertex AI.`,
-        timestamp: Date.now(),
-      };
+      throw new Error("Failed to get chat response from the server. Please try again later.");
     }
   }
 };

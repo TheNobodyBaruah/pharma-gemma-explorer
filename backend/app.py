@@ -35,19 +35,26 @@ async def chat(request: ChatRequest):
     """
     Generate a response to a user message using TxGemma model.
     """
-    # REVIEW/ADJUST prompt structure for TxGemma-27B chat model
-    # Consider adding system instructions or using specific roles format
-    prompt = f"""User: {request.message}
+    logging.info(f"Received chat request: '{request.message[:100]}...'")
     
-    Assistant:"""
+    # Construct a more sophisticated prompt for TxGemma
+    prompt = f"""You are TheraSpark, an AI assistant specialized in pharmacology and therapeutic development.
+    Answer the user's question clearly and concisely based on your knowledge of drug discovery, 
+    medicinal chemistry, and therapeutic development.
+    
+    User Question: {request.message}
+    
+    TheraSpark Answer:"""
     
     try:
         # Query the language model
+        logging.info("Sending prompt to Vertex AI TxGemma model")
         raw_response = query_llm(prompt)
+        logging.debug(f"Raw Vertex AI response: {raw_response[:200]}...")
         
-        # REVIEW/ADJUST parsing: Check if TxGemma-27B chat adds prefixes/suffixes 
-        # or needs specific formatting extraction
-        response = raw_response.strip()
+        # Process the response
+        response = raw_response.strip() if raw_response else "Sorry, I couldn't generate a response."
+        logging.info(f"Processed response: '{response[:100]}...'")
         
         return {"response": response}
         
