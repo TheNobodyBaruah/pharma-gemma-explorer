@@ -10,7 +10,7 @@ try:
     logging.info(f"Initialized Vertex AI client with project: {config.GCP_PROJECT}, location: {config.GCP_LOCATION}")
     
     # Initialize model
-    # NOTE: Ensure the model name in .env matches exactly the TxGemma model ID from Vertex AI Model Garden
+    # Using TxGemma-27B model
     model = GenerativeModel(config.MODEL_NAME)
     logging.info(f"Initialized GenerativeModel with model: {config.MODEL_NAME}")
 except Exception as e:
@@ -19,7 +19,7 @@ except Exception as e:
 
 def query_llm(prompt: str) -> str:
     """
-    Query the language model with the given prompt and return the response.
+    Query the TxGemma language model with the given prompt and return the response.
     
     Args:
         prompt: The text prompt to send to the model
@@ -35,19 +35,16 @@ def query_llm(prompt: str) -> str:
         raise ConnectionError("Vertex AI client not initialized")
     
     try:
-        # Configure generation parameters
+        # Configure generation parameters for TxGemma-27B
         generation_config = GenerationConfig(
-            temperature=0.2,  # REVIEW/ADJUST: Optimal temperature might differ for TxGemma-27B
-            max_output_tokens=1024  # REVIEW/ADJUST: TxGemma-27B might handle/require more tokens
-            # Consider additional parameters for TxGemma-27B:
-            # top_p=0.9,
-            # top_k=40
+            temperature=0.2,  # Lower temperature for more focused responses
+            max_output_tokens=1024,  # Adjust based on your needs
+            top_p=0.9,
+            top_k=40
         )
         
-        # NOTE: Review if TxGemma-27B requires a specific input format
-        # (e.g., structured messages like [{"role": "user", "parts": [prompt]}])
-        # instead of just a plain text prompt string. Adjust the 'prompt' variable
-        # passed to generate_content if necessary based on model requirements.
+        # TxGemma-27B expects a prompt string
+        logging.info(f"Sending prompt to TxGemma: {prompt[:100]}...")
         
         # Generate content
         response = model.generate_content(
@@ -56,7 +53,6 @@ def query_llm(prompt: str) -> str:
         )
         
         # Extract text from response
-        # REVIEW/ADJUST: Check if TxGemma-27B returns responses in a different format
         if response and hasattr(response, 'text'):
             return response.text
         elif response and hasattr(response, 'candidates') and response.candidates:
