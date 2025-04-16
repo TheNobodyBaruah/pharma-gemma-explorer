@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Vortex } from "@/components/ui/vortex";
 import { ButtonColorful } from "@/components/ui/button-colorful";
@@ -84,9 +83,7 @@ const LandingPage: React.FC = () => {
       rangeSpeed={1.5}
     >
       <div className="min-h-screen">
-        {/* Hero Section */}
         <section className="relative min-h-screen flex flex-col justify-center items-center px-4">
-          {/* Placeholder for full-screen WebGL background component */}
           <div className="container mx-auto text-center z-10">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -94,7 +91,6 @@ const LandingPage: React.FC = () => {
               transition={{ duration: 0.8 }}
               className="mb-8"
             >
-              {/* Logo animation (fade/scale) to be added via GSAP */}
               <InteractiveLogo
                 imageUrl="/lovable-uploads/5ac55eb2-8261-4a9f-bbb6-e464e27929d4.png"
                 className="w-full max-w-xl mx-auto mb-8 drop-shadow-[0_0_25px_rgba(137,108,219,0.7)]"
@@ -126,7 +122,6 @@ const LandingPage: React.FC = () => {
               transition={{ delay: 0.6, duration: 0.5 }}
               className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
             >
-              {/* Button animations (fade/slide + hover) to be added */}
               <Link to="/app">
                 <ButtonColorful label="Get Started" />
               </Link>
@@ -138,7 +133,6 @@ const LandingPage: React.FC = () => {
               </Link>
             </motion.div>
 
-            {/* Workflow Cards Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -168,7 +162,6 @@ const LandingPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Features Section */}
         <section id="features" className="py-20">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
@@ -192,7 +185,6 @@ const LandingPage: React.FC = () => {
               </motion.p>
             </div>
 
-            {/* Card entrance animations (stagger) to be added via GSAP */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {featureData.map((feature, index) => (
                 <motion.div
@@ -225,12 +217,12 @@ const LandingPage: React.FC = () => {
                     <FlipCardBack 
                       className="rounded-xl p-6 backdrop-blur-lg relative"
                       style={{
-                        backgroundImage: `url('/lovable-uploads/9b9a1e97-f465-48cf-93b0-bf15c84dd2d6.png')`,
+                        backgroundImage: `url('/lovable-uploads/957eba4e-37cf-47ba-8365-880c0a4bc740.png')`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center'
                       }}
                     >
-                      <div className="absolute inset-0 bg-black/40 rounded-xl" />
+                      <div className="absolute inset-0 bg-black/20 rounded-xl" />
                       <div className="relative z-10">
                         <FeatureCard
                           icon={feature.icon}
@@ -246,10 +238,8 @@ const LandingPage: React.FC = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
         <section className="py-20">
           <div className="container mx-auto px-4 text-center">
-            {/* CTA text/button animations to be added */}
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -276,7 +266,6 @@ const LandingPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Footer */}
         <footer className="py-8 border-t border-gray-800">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
