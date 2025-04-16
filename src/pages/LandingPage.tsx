@@ -222,12 +222,22 @@ const LandingPage: React.FC = () => {
                         </Button>
                       </div>
                     </FlipCardFront>
-                    <FlipCardBack className="rounded-xl p-6 bg-white/5 backdrop-blur-lg">
-                      <FeatureCard
-                        icon={feature.icon}
-                        title={feature.title}
-                        description={feature.description}
-                      />
+                    <FlipCardBack 
+                      className="rounded-xl p-6 backdrop-blur-lg relative"
+                      style={{
+                        backgroundImage: `url('/lovable-uploads/9b9a1e97-f465-48cf-93b0-bf15c84dd2d6.png')`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center'
+                      }}
+                    >
+                      <div className="absolute inset-0 bg-black/40 rounded-xl" />
+                      <div className="relative z-10">
+                        <FeatureCard
+                          icon={feature.icon}
+                          title={feature.title}
+                          description={feature.description}
+                        />
+                      </div>
                     </FlipCardBack>
                   </FlipCard>
                 </motion.div>
