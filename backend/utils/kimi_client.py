@@ -2,10 +2,16 @@
 import os
 import logging
 from openai import OpenAI, APIConnectionError, RateLimitError, APIStatusError
+from dotenv import load_dotenv
+
+# Make sure environment variables are loaded
+load_dotenv()
 
 # Load API key from environment variable
 MOONSHOT_API_KEY = os.getenv("MOONSHOT_API_KEY")
 KIMI_MODEL = os.getenv("KIMI_MODEL_NAME", "moonshot-v1-8k")  # Default model if not set
+
+logging.info(f"Kimi client initialized. API key present: {bool(MOONSHOT_API_KEY)}, Model: {KIMI_MODEL}")
 
 if not MOONSHOT_API_KEY:
     logging.warning("MOONSHOT_API_KEY environment variable not set. Kimi testing will fail.")
@@ -16,6 +22,7 @@ try:
         api_key=MOONSHOT_API_KEY,
         base_url="https://api.moonshot.cn/v1",  # Moonshot API endpoint
     )
+    logging.info("Moonshot client successfully initialized")
 except Exception as e:
      logging.error(f"Failed to initialize Moonshot client: {e}")
      client = None  # Ensure client is None if init fails

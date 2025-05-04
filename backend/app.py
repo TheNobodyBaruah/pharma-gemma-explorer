@@ -8,6 +8,12 @@ import logging
 import os
 from backend.utils.vertex_ai_client import query_llm
 from backend.utils.kimi_client import query_kimi
+from dotenv import load_dotenv
+
+# Load environment variables - ensure this happens at the start
+load_dotenv()
+logging.info(f"Environment loaded. USE_KIMI_TESTING is set to: {os.getenv('USE_KIMI_TESTING')}")
+logging.info(f"MOONSHOT_API_KEY exists: {bool(os.getenv('MOONSHOT_API_KEY'))}")
 
 app = FastAPI(
     title="TxGemma Therapeutic Development API",
