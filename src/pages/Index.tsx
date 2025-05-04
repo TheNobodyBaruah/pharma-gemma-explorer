@@ -1,15 +1,11 @@
+
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
-import DiseaseInput from '@/components/DiseaseInput';
-import TargetList from '@/components/TargetList';
-import MoleculeList from '@/components/MoleculeList';
-import ScaffoldList from '@/components/ScaffoldList';
-import ChatInterface from '@/components/ChatInterface';
-import MoleculeViewer from '@/components/MoleculeViewer';
+import SearchPanel from '@/components/SearchPanel';
+import ResultsPanel from '@/components/ResultsPanel';
 import { Target, Molecule, Scaffold, ChatMessage } from '@/types';
 import { api } from '@/services/api';
 import { mockChatMessages } from '@/lib/mockData';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
 import { Vortex } from "@/components/ui/vortex";
 
@@ -29,12 +25,8 @@ const Index: React.FC = () => {
   const [isLoadingScaffolds, setIsLoadingScaffolds] = useState<boolean>(false);
   const [scaffolds, setScaffolds] = useState<Scaffold[] | null>(null);
   
-  // State for molecule viewer
-  const [viewedSmiles, setViewedSmiles] = useState<string | null>(null);
-  const [viewedType, setViewedType] = useState<'molecule' | 'scaffold'>('molecule');
-  
   // State for chat
-  const [chatMessages, setChatMessages] = useState<ChatMessage[]>(mockChatMessages);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [isLoadingChat, setIsLoadingChat] = useState<boolean>(false);
   
   // Handle disease search
@@ -97,18 +89,6 @@ const Index: React.FC = () => {
     }
   };
   
-  // Handle viewing molecule structure
-  const handleViewMolecule = (smiles: string) => {
-    setViewedSmiles(smiles);
-    setViewedType('molecule');
-  };
-  
-  // Handle viewing scaffold structure
-  const handleViewScaffold = (smiles: string) => {
-    setViewedSmiles(smiles);
-    setViewedType('scaffold');
-  };
-  
   // Handle sending chat message
   const handleSendChatMessage = async (message: string) => {
     const userMessage: ChatMessage = {
@@ -146,8 +126,7 @@ const Index: React.FC = () => {
         particleCount={600}
         rangeY={150}
         rangeSpeed={1.2}
-      >
-      </Vortex>
+      />
       <div className="relative z-10">
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-foreground text-metallic">
@@ -159,66 +138,27 @@ const Index: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {/* Left column - Disease input and target selection */}
-          <div className="space-y-6 bg-background/80 backdrop-blur-sm rounded-lg p-4">
-            <DiseaseInput onSearch={handleDiseaseSearch} isLoading={isLoadingTargets} />
-            <TargetList
-              targets={targets}
-              selectedTargetId={selectedTargetId}
-              onSelectTarget={handleTargetSelection}
-              isLoading={isLoadingTargets}
-              disease={disease}
-            />
-          </div>
+          {/* Left column - Search panel */}
+          <SearchPanel 
+            disease={disease}
+            isLoadingTargets={isLoadingTargets}
+            targets={targets}
+            selectedTargetId={selectedTargetId}
+            onSearch={handleDiseaseSearch}
+            onSelectTarget={handleTargetSelection}
+          />
           
-          {/* Middle column - Molecules, scaffolds, and structure viewer */}
-          <div className="space-y-6 md:col-span-2 bg-background/80 backdrop-blur-sm rounded-lg p-4">
-            {viewedSmiles ? (
-              <MoleculeViewer
-                smiles={viewedSmiles}
-                onClose={() => setViewedSmiles(null)}
-                title={viewedType === 'molecule' ? 'Molecule Structure' : 'Scaffold Structure'}
-              />
-            ) : (
-              <div className="rounded-lg border bg-muted/30 p-6 text-center">
-                <p className="text-muted-foreground">
-                  Select a molecule or scaffold to view its structure
-                </p>
-              </div>
-            )}
-            
-            <Tabs defaultValue="molecules" className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="molecules">Molecules</TabsTrigger>
-                <TabsTrigger value="scaffolds">Scaffolds</TabsTrigger>
-              </TabsList>
-              <TabsContent value="molecules">
-                <MoleculeList
-                  molecules={molecules}
-                  onViewMolecule={handleViewMolecule}
-                  isLoading={isLoadingMolecules}
-                  selectedTargetName={selectedTargetName || ''}
-                />
-              </TabsContent>
-              <TabsContent value="scaffolds">
-                <ScaffoldList
-                  scaffolds={scaffolds}
-                  onViewScaffold={handleViewScaffold}
-                  isLoading={isLoadingScaffolds}
-                  selectedTargetName={selectedTargetName || ''}
-                />
-              </TabsContent>
-            </Tabs>
-            
-            {/* Chat Interface */}
-            <div className="mt-6 h-[500px]">
-              <ChatInterface
-                messages={chatMessages}
-                onSendMessage={handleSendChatMessage}
-                isLoading={isLoadingChat}
-              />
-            </div>
-          </div>
+          {/* Middle & right column - Results panel */}
+          <ResultsPanel 
+            molecules={molecules}
+            scaffolds={scaffolds}
+            isLoadingMolecules={isLoadingMolecules}
+            isLoadingScaffolds={isLoadingScaffolds}
+            selectedTargetName={selectedTargetName}
+            chatMessages={chatMessages}
+            isLoadingChat={isLoadingChat}
+            onSendChatMessage={handleSendChatMessage}
+          />
         </div>
       </div>
     </Layout>
